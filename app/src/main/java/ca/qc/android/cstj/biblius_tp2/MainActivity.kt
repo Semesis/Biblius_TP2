@@ -8,10 +8,29 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import ca.qc.android.cstj.biblius_tp2.fragments.CategorieListFragment
+import ca.qc.android.cstj.biblius_tp2.fragments.OnListItemFragmentInteractionListener
+import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleListFragment
+import ca.qc.android.cstj.biblius_tp2.models.Categorie
+import ca.qc.android.cstj.biblius_tp2.models.Item
+import ca.qc.android.cstj.biblius_tp2.models.Succursale
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(),
+                     NavigationView.OnNavigationItemSelectedListener,
+                     OnListItemFragmentInteractionListener {
+
+    override fun onListItemFragmentInteraction(item: Item?) {
+        when(item) {
+            is Succursale -> {
+
+            }
+            is Categorie -> {
+
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +43,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val transaction = fragmentManager.beginTransaction()
+
+        transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
+        transaction.commit()
     }
 
     override fun onBackPressed() {
@@ -70,4 +94,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+
 }

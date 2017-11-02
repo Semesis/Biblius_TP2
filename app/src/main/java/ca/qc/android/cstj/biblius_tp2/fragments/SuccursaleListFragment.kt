@@ -12,7 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import ca.qc.android.cstj.biblius_tp2.R
-import ca.qc.android.cstj.biblius_tp2.helpers.SUCCURSALE
+import ca.qc.android.cstj.biblius_tp2.adapters.RecyclerViewAdapter
+import ca.qc.android.cstj.biblius_tp2.helpers.SUCCURSALES_URL
 import ca.qc.android.cstj.biblius_tp2.helpers.TP1_WEB_SERVICES
 import ca.qc.android.cstj.biblius_tp2.models.Succursale
 import com.github.kittinunf.fuel.android.core.Json
@@ -31,7 +32,8 @@ class SuccursaleListFragment : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var mColumnCount = 1
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mListener: OnListItemFragmentInteractionListener? = null
+    private var succursales = mutableListOf<Succursale>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +44,7 @@ class SuccursaleListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_succursale_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
         // Set adapter
         if(view is RecyclerView) {
@@ -52,9 +54,11 @@ class SuccursaleListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
+            view.adapter = RecyclerViewAdapter(succursales, mListener)
 
-            SUCCURSALE.httpGet().responseJson { request, response, result ->
-                view.adapter = RecyclerViewAdapter(createSuccursaleList(result.get()), mListener)
+            SUCCURSALES_URL.httpGet().responseJson { request, response, result ->
+                createSuccursaleList(result.get())
+                view.adapter.notifyDataSetChanged()
             }
         }
         return view
@@ -72,7 +76,7 @@ class SuccursaleListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
+        if (context is OnListItemFragmentInteractionListener) {
             mListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -84,19 +88,7 @@ class SuccursaleListFragment : Fragment() {
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListSuccursaleFragmentInteraction(succursale: Succursale?)
-    }
+
 
     companion object {
         private val ARG_COLUMN_COUNT = "column-count"
