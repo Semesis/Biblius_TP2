@@ -32,7 +32,8 @@ import com.github.kittinunf.fuel.httpGet
 class CategorieListFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
-    private var mListener: OnListFragmentInteractionListener? = null
+    private var mListener: OnListItemFragmentInteractionListener? = null
+    private var categories = mutableListOf<Categorie>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,7 @@ class CategorieListFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle): View? {
+                              savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
         // Set the adapter
@@ -54,30 +55,32 @@ class CategorieListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
+            view.adapter = RecyclerViewAdapter(categories, mListener)
+
             CATEGORIES_URL.httpGet().responseJson { request, response, result ->
-                view.adapter = RecyclerViewAdapter(createCategorieList(result.get()), mListener)
+                createCategorieList(result.get())
+                view.adapter.notifyDataSetChanged()
             }
 
         }
         return view
     }
 
-    fun createCategorieList(json: Json): List<Categorie>{
+    fun createCategorieList(json: Json) {
 
-        var categories = mutableListOf<Categorie>()
+        categories.clear()
         val tabJson = json.array()
 
         for ( i in 0.. (tabJson.length() - 1)){
             categories.add(Categorie(Json(tabJson[i].toString())))
         }
 
-        return categories
     }
 
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
+        if (context is OnListItemFragmentInteractionListener) {
             mListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
@@ -89,19 +92,7 @@ class CategorieListFragment : Fragment() {
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(categorie: Categorie?)
-    }
+
 
     companion object {
 
