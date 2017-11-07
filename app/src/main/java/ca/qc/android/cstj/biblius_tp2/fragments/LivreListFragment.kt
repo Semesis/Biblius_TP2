@@ -46,7 +46,8 @@ class LivreListFragment : Fragment() {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
             view.adapter = LivreCategorieRecyclerView(livres, mListener)
-            TP1_WEB_SERVICES.httpGet().responseJson{ request, response, result ->
+            urlLivres = arguments.getString(HREF)
+            urlLivres.httpGet().responseJson{ request, response, result ->
                 when(response.httpStatusCode){
                     200 -> {
                         createListLivre(result.get())
@@ -86,11 +87,12 @@ class LivreListFragment : Fragment() {
 
     companion object {
         private val ARG_COLUMN_COUNT = "column-count"
+        private val HREF = "href"
 
-        fun newInstance(columnCount: Int): LivreListFragment {
+        fun newInstance(columnCount: Int, href: String ): LivreListFragment {
             val fragment = LivreListFragment()
             val args = Bundle()
-            args.putInt(ARG_COLUMN_COUNT, columnCount)
+            args.putInt(ARG_COLUMN_COUNT, columnCount).putIn(HREF, href)
             fragment.arguments = args
             return fragment
         }
