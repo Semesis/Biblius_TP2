@@ -1,5 +1,6 @@
 package ca.qc.android.cstj.biblius_tp2
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import ca.qc.android.cstj.biblius_tp2.fragments.CategorieListFragment
+import ca.qc.android.cstj.biblius_tp2.fragments.LivreListFragment
 import ca.qc.android.cstj.biblius_tp2.fragments.OnListItemFragmentInteractionListener
 import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleListFragment
 import ca.qc.android.cstj.biblius_tp2.models.Categorie
@@ -22,14 +24,21 @@ class MainActivity : AppCompatActivity(),
                      OnListItemFragmentInteractionListener {
 
     override fun onListItemFragmentInteraction(item: Item?) {
-        when(item) {
-            is Succursale -> {
-
+        Runnable {
+            val transaction = fragmentManager.beginTransaction()
+            transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            when (item) {
+                is Succursale -> {
+                    /*transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment.newInstance(item.href))
+                    transaction.addToBackStack("DetailsSuccursale${item.href}")*/
+                }
+                is Categorie -> {
+                    transaction.replace(R.id.contentFrame, LivreListFragment.newInstance(item.href))
+                    transaction.addToBackStack("DetailsLivre${item.href}")
+                }
             }
-            is Categorie -> {
-
-            }
-        }
+            transaction.commit()
+        }.run()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,16 +87,14 @@ class MainActivity : AppCompatActivity(),
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_categorie -> {
-                // Handle the camera action
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
+                transaction.commit()
             }
             R.id.nav_succursale -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
+                transaction.commit()
             }
         }
 
