@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import ca.qc.android.cstj.biblius_tp2.fragments.CategorieListFragment
+import ca.qc.android.cstj.biblius_tp2.fragments.LogoFragment
 import ca.qc.android.cstj.biblius_tp2.fragments.OnListItemFragmentInteractionListener
 import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleListFragment
 import ca.qc.android.cstj.biblius_tp2.models.Categorie
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity(),
 
         val transaction = fragmentManager.beginTransaction()
 
-        transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
+        transaction.replace(R.id.contentFrame, LogoFragment.newInstance())
         transaction.commit()
     }
 
