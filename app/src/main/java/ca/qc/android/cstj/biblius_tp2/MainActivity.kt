@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(),
                     transaction.addToBackStack("DetailsSuccursale${item.href}")*/
                 }
                 is Categorie -> {
-                    transaction.replace(R.id.contentFrame, LivreListFragment.newInstance(item.href))
+                    transaction.replace(R.id.contentFrame, LivreListFragment.newInstance(1, item.href))
                     transaction.addToBackStack("DetailsLivre${item.href}")
                 }
             }

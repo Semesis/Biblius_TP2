@@ -46,7 +46,7 @@ class LivreListFragment : Fragment() {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
             view.adapter = LivreCategorieRecyclerView(livres, mListener)
-            urlLivres = arguments.getString(HREF)
+            val urlLivres = arguments.getString(HREF) + "/livres"
             urlLivres.httpGet().responseJson{ request, response, result ->
                 when(response.httpStatusCode){
                     200 -> {
@@ -67,14 +67,14 @@ class LivreListFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context) {
+    /*override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {
             mListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
         }
-    }
+    }*/
 
     override fun onDetach() {
         super.onDetach()
@@ -92,7 +92,8 @@ class LivreListFragment : Fragment() {
         fun newInstance(columnCount: Int, href: String ): LivreListFragment {
             val fragment = LivreListFragment()
             val args = Bundle()
-            args.putInt(ARG_COLUMN_COUNT, columnCount).putIn(HREF, href)
+            args.putInt(ARG_COLUMN_COUNT, columnCount)
+            args.putString(HREF, href)
             fragment.arguments = args
             return fragment
         }
