@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import ca.qc.android.cstj.biblius_tp2.fragments.CategorieListFragment
 import ca.qc.android.cstj.biblius_tp2.fragments.OnListItemFragmentInteractionListener
+import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleDetailsFragment
 import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleListFragment
 import ca.qc.android.cstj.biblius_tp2.models.Categorie
 import ca.qc.android.cstj.biblius_tp2.models.Item
@@ -22,15 +23,28 @@ class MainActivity : AppCompatActivity(),
                      OnListItemFragmentInteractionListener {
 
     override fun onListItemFragmentInteraction(item: Item?) {
-        when(item) {
-            is Succursale -> {
+        Runnable {
+            val transaction = fragmentManager.beginTransaction()
+            transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+            when(item) {
+                is Succursale -> {
+                    transaction.replace(R.id.contentFrame, SuccursaleDetailsFragment.newInstance(item.href))
+                    transaction.addToBackStack("DetailsSuccursale${item.href}")
+                }
+                is Categorie -> {
 
+                }
             }
-            is Categorie -> {
+            transaction.commit()
+        }.run()
 
-            }
-        }
     }
+
+    fun RunOnListFragmentInteraction(item : String) {
+
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +60,7 @@ class MainActivity : AppCompatActivity(),
 
         val transaction = fragmentManager.beginTransaction()
 
-        transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
+        transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
         transaction.commit()
     }
 
@@ -79,9 +93,16 @@ class MainActivity : AppCompatActivity(),
         when (item.itemId) {
             R.id.nav_categorie -> {
                 // Handle the camera action
+                val transaction = fragmentManager.beginTransaction()
+
+                transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
+                transaction.commit()
             }
             R.id.nav_succursale -> {
+                val transaction = fragmentManager.beginTransaction()
 
+                transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
+                transaction.commit()
             }
             R.id.nav_share -> {
 
