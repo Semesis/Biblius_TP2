@@ -7,4 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="categorie">Catégorie</string>
     <string name="succursale">Succursale</string>
+
+    <string name="succursales">Succursales</string>
+    <string name="categories">Categories</string>
 </resources>

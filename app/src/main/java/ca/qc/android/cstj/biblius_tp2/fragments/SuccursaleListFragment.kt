@@ -37,6 +37,7 @@ class SuccursaleListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (arguments != null) {
             mColumnCount = arguments.getInt(ARG_COLUMN_COUNT)
         }
@@ -64,14 +65,14 @@ class SuccursaleListFragment : Fragment() {
         return view
     }
 
-    fun createSuccursaleList(json: Json) : List<Succursale> {
-        val succursales = mutableListOf<Succursale>()
+    fun createSuccursaleList(json: Json) {
+
+        succursales.clear()
         val tabJson = json.array()
 
         for (i in 0.. (tabJson.length() -1 )) {
             succursales.add(Succursale(Json(tabJson[i].toString())))
         }
-        return succursales
     }
 
     override fun onAttach(context: Context) {
@@ -79,7 +80,7 @@ class SuccursaleListFragment : Fragment() {
         if (context is OnListItemFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
         }
     }
 
@@ -91,6 +92,7 @@ class SuccursaleListFragment : Fragment() {
 
 
     companion object {
+
         private val ARG_COLUMN_COUNT = "column-count"
 
         fun newInstance(columnCount: Int) : SuccursaleListFragment {
@@ -98,6 +100,7 @@ class SuccursaleListFragment : Fragment() {
             val args = Bundle()
             args.putInt(ARG_COLUMN_COUNT, columnCount)
             fragment.arguments = args
+
             return fragment
         }
     }
