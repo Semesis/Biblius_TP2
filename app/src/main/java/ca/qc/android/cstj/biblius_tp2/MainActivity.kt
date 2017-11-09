@@ -1,5 +1,6 @@
 package ca.qc.android.cstj.biblius_tp2
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import ca.qc.android.cstj.biblius_tp2.fragments.CategorieListFragment
+import ca.qc.android.cstj.biblius_tp2.fragments.LivreListFragment
 import ca.qc.android.cstj.biblius_tp2.fragments.LogoFragment
 import ca.qc.android.cstj.biblius_tp2.fragments.OnListItemFragmentInteractionListener
 import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleDetailsFragment
@@ -33,16 +35,15 @@ class MainActivity : AppCompatActivity(),
                     transaction.addToBackStack("DetailsSuccursale${item.href}")
                 }
                 is Categorie -> {
-
+                    transaction.replace(R.id.contentFrame, LivreListFragment.newInstance(1, item.href))
+                    transaction.addToBackStack("DetailsLivre${item.href}")
                 }
             }
             transaction.commit()
         }.run()
-
     }
 
     fun RunOnListFragmentInteraction(item : String) {
-
     }
 
 
@@ -94,9 +95,8 @@ class MainActivity : AppCompatActivity(),
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_categorie -> {
-                // Handle the camera action
                 val transaction = fragmentManager.beginTransaction()
-
+              
                 transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
                 transaction.commit()
             }
@@ -106,17 +106,9 @@ class MainActivity : AppCompatActivity(),
                 transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
                 transaction.commit()
             }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-
-
 }
