@@ -1,49 +1,112 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleDetailsFragment">
 
+
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <TextView
+        android:id="@+id/lblAppelatifSuccursaleDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:padding="10dp"/>
+    <TextView
+        android:id="@+id/lblAdresseSuccursaleDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblAppelatifSuccursaleDetail"
+        android:gravity="center"
+        android:padding="2dp"/>
+
+    <RelativeLayout
+        android:id="@+id/rlVilleProvince"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblAdresseSuccursaleDetail"
+        android:gravity="center"
+        android:padding="2dp">
 
         <TextView
-            android:id="@+id/lblAppelatifSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblAdresseSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
             android:id="@+id/lblVilleSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <TextView
             android:id="@+id/lblProvinceSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/lblVilleSuccursaleDetail"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lblCodePostalSuccursaleDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/rlVilleProvince"
+        android:padding="2dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlTelephone"
+        android:layout_below="@id/lblCodePostalSuccursaleDetail"
+        android:gravity="center"
+        android:padding="2dp">
+
         <TextView
-            android:id="@+id/lblCodePostalSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblTelephone"
+            android:text="  Téléphone : "/>
+
         <TextView
             android:id="@+id/lblTelephoneSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/lblTelephone"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rlTelecopieur"
+        android:layout_below="@id/rlTelephone"
+        android:gravity="center"
+        android:padding="2dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblTelecopieur"
+            android:text="Télécopieur : "/>
+
         <TextView
             android:id="@+id/lblTelecopieurSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblInformationSuccursaleDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-</FrameLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/lblTelecopieur"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lblInformationSuccursaleDetail"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlTelecopieur"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:padding="30dp"/>
+
+</RelativeLayout>
 
 
 
