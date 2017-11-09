@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.card_livre_categorie.view.*
 /**
  * Created by Administrateur on 2017-11-07.
  */
-class LivreCategorieRecyclerView(private val mValues:List<Livre>,
-                                 private val mListener: LivreListFragment.OnListFragmentInteractionListener?):RecyclerView.Adapter<LivreCategorieRecyclerView.ViewHolder>() {
+class LivreCategorieRecyclerViewAdapter(private val mValues:List<Livre>,
+                                        private val mListener: LivreListFragment.OnListFragmentInteractionListener?):RecyclerView.Adapter<LivreCategorieRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_livre_categorie, parent, false)
@@ -26,7 +26,7 @@ class LivreCategorieRecyclerView(private val mValues:List<Livre>,
 
         holder.bind(mValues[position])
         holder.mView.setOnClickListener{
-            mListener!!.onListCategorieFragmentInteraction(holder.livre)
+            mListener!!.onLivreCategorieFragmentInteraction(holder.livre)
         }
     }
 

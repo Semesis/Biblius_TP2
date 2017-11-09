@@ -9,21 +9,27 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import ca.qc.android.cstj.biblius_tp2.fragments.CategorieListFragment
-import ca.qc.android.cstj.biblius_tp2.fragments.LivreListFragment
-import ca.qc.android.cstj.biblius_tp2.fragments.LogoFragment
-import ca.qc.android.cstj.biblius_tp2.fragments.OnListItemFragmentInteractionListener
-import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleDetailsFragment
-import ca.qc.android.cstj.biblius_tp2.fragments.SuccursaleListFragment
+import ca.qc.android.cstj.biblius_tp2.fragments.*
 import ca.qc.android.cstj.biblius_tp2.models.Categorie
 import ca.qc.android.cstj.biblius_tp2.models.Item
+import ca.qc.android.cstj.biblius_tp2.models.Livre
 import ca.qc.android.cstj.biblius_tp2.models.Succursale
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(),
                      NavigationView.OnNavigationItemSelectedListener,
-                     OnListItemFragmentInteractionListener {
+                     OnListItemFragmentInteractionListener, LivreListFragment.OnListFragmentInteractionListener {
+
+    override fun onLivreCategorieFragmentInteraction(livre: Livre?) {
+        val transaction = fragmentManager.beginTransaction()
+        transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+        if (livre != null) {
+            transaction.replace(R.id.contentFrame, LivreDetailFragment.newInstance(livre.href))
+            transaction.addToBackStack("DetailLivre${livre.href}")
+        }
+        transaction.commit()
+    }
 
     override fun onListItemFragmentInteraction(item: Item?) {
         Runnable {
@@ -36,7 +42,7 @@ class MainActivity : AppCompatActivity(),
                 }
                 is Categorie -> {
                     transaction.replace(R.id.contentFrame, LivreListFragment.newInstance(1, item.href))
-                    transaction.addToBackStack("DetailsLivre${item.href}")
+                    transaction.addToBackStack("ListLivre${item.href}")
                 }
             }
             transaction.commit()

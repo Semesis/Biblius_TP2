@@ -37,7 +37,6 @@ class SuccursaleDetailsFragment : Fragment() {
                 200 -> {
                     val succursale = Succursale(result.get())
 
-                    Toast.makeText(activity.applicationContext, succursale.appelatif, Toast.LENGTH_LONG).show()
                     // Construction de l'interface graphique
                     lblAppelatifSuccursaleDetail.text = succursale.appelatif
                     lblAdresseSuccursaleDetail.text = succursale.adresse

@@ -12,4 +12,5 @@ class Livre(jsonObject : Json) {
     var sujet: String = jsonObject.obj().getString("sujet")
     var isbn: String = jsonObject.obj().getString("isbn")
     var image: String = jsonObject.obj().getString("image")
+    var href: String = jsonObject.obj().getString("href")
 }

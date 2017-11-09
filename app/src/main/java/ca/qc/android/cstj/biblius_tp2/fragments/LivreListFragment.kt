@@ -10,13 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ca.qc.android.cstj.biblius_tp2.R
-import ca.qc.android.cstj.biblius_tp2.adapters.LivreCategorieRecyclerView
-import ca.qc.android.cstj.biblius_tp2.helpers.TP1_WEB_SERVICES
+import ca.qc.android.cstj.biblius_tp2.adapters.LivreCategorieRecyclerViewAdapter
 import ca.qc.android.cstj.biblius_tp2.models.Livre
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
-import kotlinx.android.synthetic.main.card_livre_categorie.*
 
 /**
  * Created by Administrateur on 2017-11-07.
@@ -45,7 +43,7 @@ class LivreListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = LivreCategorieRecyclerView(livres, mListener)
+            view.adapter = LivreCategorieRecyclerViewAdapter(livres, mListener)
             val urlLivres = arguments.getString(HREF) + "/livres"
             urlLivres.httpGet().responseJson{ request, response, result ->
                 when(response.httpStatusCode){
@@ -67,14 +65,14 @@ class LivreListFragment : Fragment() {
         }
     }
 
-    /*override fun onAttach(context: Context) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnListFragmentInteractionListener) {
             mListener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
         }
-    }*/
+    }
 
     override fun onDetach() {
         super.onDetach()
@@ -82,7 +80,7 @@ class LivreListFragment : Fragment() {
     }
 
     interface OnListFragmentInteractionListener{
-        fun onListCategorieFragmentInteraction(livre: Livre?)
+        fun onLivreCategorieFragmentInteraction(livre: Livre?)
     }
 
     companion object {
