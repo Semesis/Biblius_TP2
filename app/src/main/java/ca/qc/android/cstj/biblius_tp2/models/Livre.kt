@@ -13,4 +13,10 @@ class Livre(jsonObject : Json) {
     var isbn: String = jsonObject.obj().getString("isbn")
     var image: String = jsonObject.obj().getString("image")
     var href: String = jsonObject.obj().getString("href")
+    //var commentairesArray = jsonObject.obj().getJSONArray("commentaires")
+    var commentaires = mutableListOf<Commentaire>()
+
+    //commentaires = createCommentaireList(commentairesArray)
+
+
 }

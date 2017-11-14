@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment">
 
 
@@ -23,50 +24,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <TextView
-            android:id="@+id/lblCategorieDetail"
+            android:id="@+id/lblSujetDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <TextView
             android:id="@+id/lblISBNDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <TextView
             android:id="@+id/lblCommentaireTitre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/commentaires"/>
-        <TextView
-            android:id="@+id/lblAuteurCommentaireDetail"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listCommentaire"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblCommentaireDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblRating"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblDateCommentaireDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <EditText
-            android:id="@+id/txtNomPrenom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <EditText
-            android:id="@+id/txtCommentaire"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <RatingBar
-            android:id="@+id/rtbEtoile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <Button
-            android:id="@+id/btnAjouterCommentaire"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:name="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment"
+            tools:listitem="@layout/card_commentaire"/>
+            <EditText
+                android:id="@+id/txtNomPrenom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Votre nom et prénom"/>
+            <EditText
+                android:id="@+id/txtCommentaire"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Votre commentaire"/>
+            <RatingBar
+                android:id="@+id/rtbEtoile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/btnAjouterCommentaire"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </FrameLayout>
