@@ -5,7 +5,7 @@
     android:layout_height="75dp"
     android:layout_width="match_parent"
     android:layout_margin="2dp"
-    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardBackgroundColor="#510025"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="2dp"
     >
@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:gravity="center"
-            android:textColor="#000000"/>
+            android:textColor="#fffafa"/>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
