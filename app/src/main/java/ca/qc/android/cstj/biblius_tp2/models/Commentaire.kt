@@ -7,10 +7,11 @@ import com.google.gson.annotations.Expose
 /**
  * Created by Administrateur on 2017-11-14.
  */
-data class Commentaire(@Expose var dateCommentaire: String,  @Expose var auteurCommentaire: String, @Expose var message: String, @Expose var etoile: Int ) {
+data class Commentaire(var dateCommentaire: String,  @Expose var auteurCommentaire: String, @Expose var message: String, @Expose var etoile: Int ) {
     constructor(json:Json) :this(json.obj().getString("dateCommentaire"), json.obj().getString("auteurCommentaire"), json.obj().getString("message"), json.obj().getInt("etoile"))
 
+
     fun toJson():String{
-        return GsonBuilder().excludeFieldsWithModifiers().create().toJson(this)
+        return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(this)
     }
 }

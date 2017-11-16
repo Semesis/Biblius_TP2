@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imgLivreDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
         <TextView
             android:id="@+id/lblPrixDetail"
             android:layout_width="match_parent"
@@ -58,12 +58,15 @@
                 android:hint="Votre commentaire"/>
             <RatingBar
                 android:id="@+id/rtbEtoile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:numStars="5"
+                android:stepSize="1"/>
             <Button
                 android:id="@+id/btnAjouterCommentaire"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:text="@string/ajouter"/>
 
     </LinearLayout>
 
