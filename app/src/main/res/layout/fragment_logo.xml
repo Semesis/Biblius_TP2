@@ -16,7 +16,9 @@
         android:layout_margin="25dp"
         android:translationY="-20dp"
         android:layout_gravity="bottom"
-        android:text="@string/succursales" />
+        android:text="@string/succursales"
+        android:background="#510025"
+        android:textColor="#fffafa"/>
 
     <Button
         android:id="@+id/btnCategories"
@@ -26,5 +28,7 @@
         android:layout_marginBottom="200dp"
         android:layout_gravity="bottom"
         android:translationY="-70dp"
-        android:text="@string/categories" />
+        android:text="@string/categories"
+        android:background="#510025"
+        android:textColor="#fffafa"/>
 </FrameLayout>
