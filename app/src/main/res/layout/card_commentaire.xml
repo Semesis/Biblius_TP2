@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:layout_margin="2dp"
-    card_view:cardBackgroundColor="@android:color/white"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="2dp"
     >
@@ -13,7 +12,8 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#C0C0C0">
 
         <TextView
             android:id="@+id/lblAuteurCommentaire"
@@ -21,23 +21,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="10dp"/>
+            android:textColor="#510025"
+            android:textSize="14dp"/>
         <TextView
             android:id="@+id/lblCommentaire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="10dp"/>
+            android:textColor="#510025"
+            android:textSize="12dp"/>
         <TextView
             android:id="@+id/lblDateCommentaire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAlignment="center"
-            android:textColor="#000000"/>
+            android:textColor="#510025"/>
         <RatingBar
             android:id="@+id/rtbEtoileCommentaire"
             android:layout_width="wrap_content"
@@ -45,7 +45,8 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:numStars="5"/>
+            android:numStars="5"
+            android:progressTint="#510025"/>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

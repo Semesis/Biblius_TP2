@@ -50,11 +50,16 @@ class LivreDetailFragment : Fragment() {
                 200 -> {
                     val livre = Livre(result.get())
                     lblAuteurDetail.text = livre.auteur
-                    lblPrixDetail.text = livre.prix.toString()
+                    lblPrixDetail.text = "${livre.prix.toString()} $"
                     lblSujetDetail.text = livre.sujet
                     lblISBNDetail.text = "ISBN: " + livre.isbn
                     val urlLivre = "${TP1_WEB_SERVICES}${livre.image}"
-                    Picasso.with(imgLivreDetail.context).load(urlLivre).centerCrop().fit().into(imgLivreDetail)
+                    Picasso.with(imgLivreDetail.context)
+                            .load(urlLivre)
+                            .resize(400,500)
+                           /* .centerCrop()
+                            .fit()*/
+                            .into(imgLivreDetail)
 
                     createCommentaireList(result.get())
 
@@ -73,7 +78,7 @@ class LivreDetailFragment : Fragment() {
                         txtNomPrenom.text.toString(),
                         txtCommentaire.text.toString(),
                         rtbEtoile.rating.toInt())
-                Toast.makeText(context, commentaire.toJson(), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Commentaire ajouté!", Toast.LENGTH_LONG).show()
                 val hrefPost = href + "/commentaires"
                 hrefPost.httpPost()
                         .header("Content-Type" to "application/json")

@@ -1,3 +1,6 @@
+
+
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -5,69 +8,132 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imgLivreDetail"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
-        <TextView
-            android:id="@+id/lblPrixDetail"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblAuteurDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblSujetDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView
-            android:id="@+id/lblISBNDetail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgLivreDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/lblPrixDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#510025"/>
+                <TextView
+                    android:id="@+id/lblAuteurDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:textStyle="italic"
+                    android:textColor="#510025"/>
+                <TextView
+                    android:id="@+id/lblSujetDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:textColor="#510025"/>
+                <TextView
+                    android:id="@+id/lblISBNDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:textColor="#510025"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/lblCommentaireTitre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/commentaires"/>
+            android:text="@string/commentaires"
+            android:gravity="center"
+            android:textColor="#510025"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:background="#696969"/>
+
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listCommentaire"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="150dp"
             android:name="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment"
             app:layoutManager="LinearLayoutManager"
             tools:context="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment"
             tools:listitem="@layout/card_commentaire"/>
+
+
+        <TextView
+            android:id="@+id/lblAjouterCommentaire"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/ajouter_un_commentaire"
+            android:gravity="center"
+            android:textColor="#510025"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:background="#696969"/>
+
             <EditText
                 android:id="@+id/txtNomPrenom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Votre nom et prénom"/>
+                android:hint="Votre nom et prénom"
+                android:textColor="#510025"/>
             <EditText
                 android:id="@+id/txtCommentaire"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Votre commentaire"/>
+                android:hint="Votre commentaire"
+                android:textColor="#510025"/>
             <RatingBar
                 android:id="@+id/rtbEtoile"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:numStars="5"
-                android:stepSize="1"/>
+                android:stepSize="1"
+                android:progressTint="#510025"/>
             <Button
                 android:id="@+id/btnAjouterCommentaire"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/ajouter"/>
+                android:text="@string/ajouter"
+                android:background="#510025"
+                android:textColor="#fffafa"/>
 
     </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

@@ -40,7 +40,7 @@ class CommentaireRecyclerViewAdapter (private val mValues:List<Commentaire>):Rec
             this.commentaire = commentaire
             this.lblAuteurCommentaire.text = commentaire.auteurCommentaire
             this.lblCommentaire.text = commentaire.message
-            this.lblDateCommentaire.text = commentaire.dateCommentaire
+            this.lblDateCommentaire.text = "${commentaire.dateCommentaire.substring(0,10)}"
             this.rtbEtoileCommentaire.rating = commentaire.etoile.toFloat()
         }
 

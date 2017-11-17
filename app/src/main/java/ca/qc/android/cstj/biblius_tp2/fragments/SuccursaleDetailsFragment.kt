@@ -42,7 +42,7 @@ class SuccursaleDetailsFragment : Fragment() {
                     lblAdresseSuccursaleDetail.text = succursale.adresse
                     lblVilleSuccursaleDetail.text = succursale.ville
                     lblProvinceSuccursaleDetail.text = " (${succursale.province})"
-                    lblCodePostalSuccursaleDetail.text = succursale.codePostal
+                    lblCodePostalSuccursaleDetail.text = "${succursale.codePostal.substring(0,3)} ${succursale.codePostal.substring(3,6)}"
                     lblTelephoneSuccursaleDetail.text = "${succursale.telephone.substring(0,3)}-${succursale.telephone.substring(3,6)}-${succursale.telephone.substring(6)}"
                     lblTelecopieurSuccursaleDetail.text = "${succursale.telecopieur.substring(0,3)}-${succursale.telecopieur.substring(3,6)}-${succursale.telecopieur.substring(6)}"
                     lblInformationSuccursaleDetail.text = succursale.information
