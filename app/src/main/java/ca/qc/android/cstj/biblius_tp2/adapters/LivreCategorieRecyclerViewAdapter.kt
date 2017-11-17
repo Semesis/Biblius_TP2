@@ -46,7 +46,12 @@ class LivreCategorieRecyclerViewAdapter(private val mValues:List<Livre>,
             this.lblAuteur.text = livre.auteur
 
             val urlLivre = "$TP1_WEB_SERVICES${livre.image}"
-            Picasso.with(imgLivre.context).load(urlLivre).centerCrop().fit().into(imgLivre)
+            Picasso.with(imgLivre.context)
+                    .load(urlLivre)
+                    .resize(400,500)
+                    /*.centerCrop()*/
+                    /*.fit()*/
+                    .into(imgLivre)
         }
     }
 }
