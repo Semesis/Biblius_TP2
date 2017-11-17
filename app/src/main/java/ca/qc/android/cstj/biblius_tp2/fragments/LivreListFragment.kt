@@ -46,10 +46,13 @@ class LivreListFragment : Fragment() {
             view.adapter = LivreCategorieRecyclerViewAdapter(livres, mListener)
             val urlLivres = arguments.getString(HREF) + "/livres"
             urlLivres.httpGet().responseJson{ request, response, result ->
-                when(response.httpStatusCode){
+                when(response.statusCode){
                     200 -> {
                         createListLivre(result.get())
                         view.adapter.notifyDataSetChanged()
+                    }
+                    500 -> {
+
                     }
                 }
             }
@@ -58,6 +61,7 @@ class LivreListFragment : Fragment() {
     }
 
     fun createListLivre(json: Json){
+        livres.clear()
         val tabJson = json.array()
 
         for (i in 0.. (tabJson.length() - 1 )){
