@@ -3,7 +3,7 @@ package ca.qc.android.cstj.biblius_tp2.models
 import com.github.kittinunf.fuel.android.core.Json
 
 /**
- * Created by Administrateur on 2017-11-07.
+ * Classe qui contient les information d'un Livre
  */
 class Livre(jsonObject : Json) {
     var titre : String = jsonObject.obj().getString("titre")
@@ -13,10 +13,6 @@ class Livre(jsonObject : Json) {
     var isbn: String = jsonObject.obj().getString("isbn")
     var image: String = jsonObject.obj().getString("image")
     var href: String = jsonObject.obj().getString("href")
-    //var commentairesArray = jsonObject.obj().getJSONArray("commentaires")
     var commentaires = mutableListOf<Commentaire>()
-
-    //commentaires = createCommentaireList(commentairesArray)
-
 
 }

@@ -17,14 +17,17 @@ import kotlinx.android.synthetic.main.card_item.view.*
  class RecyclerViewAdapter(private val mValues:List<Item>, private val mListener: OnListItemFragmentInteractionListener?):RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
      override fun onCreateViewHolder(parent:ViewGroup, viewType:Int): ViewHolder {
+        // On affiche la carte d'item, qui prendra soit une liste de catégories ou une liste de succursales. Ceci affiche seulement les noms.
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.card_item, parent, false)
         return ViewHolder(view)
     }
 
      override fun onBindViewHolder(holder: ViewHolder, position:Int) {
+        // On bind les items de la liste au ViewHolder
         holder.bind(mValues[position])
 
+         // Ajoute un événement lorsque l'on clique sur un des items de la liste, affiche soit la liste des livres d'une catégorie ou la liste des succursales, car la fonction est surchargée.
         holder.mView.setOnClickListener {
             mListener!!.onListItemFragmentInteraction(holder.item)
         }
@@ -38,6 +41,7 @@ import kotlinx.android.synthetic.main.card_item.view.*
         var lblNomItem = mView.lblNomItem
         var item: Item? = null
 
+        // Prend un item en paramètre et fait le binding
         fun bind(item: Item){
             this.item = item
             this.lblNomItem.text = item.getAffichage()

@@ -32,6 +32,7 @@ class LivreListFragment : Fragment() {
         }
     }
 
+    // Fonction qui détermine le comportement lorsqu'on crée la vue.
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_livre_categorie_list, container, false)
 
@@ -60,6 +61,7 @@ class LivreListFragment : Fragment() {
         return view
     }
 
+    // On ajoute les livres d'une catégorie dans une liste qui sera utilisé lorsqu'on crée la vue
     fun createListLivre(json: Json){
         livres.clear()
         val tabJson = json.array()

@@ -19,18 +19,10 @@ import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
 
 /**
- * A fragment representing a list of Items.
- *
- *
- * Activities containing this fragment MUST implement the [OnListFragmentInteractionListener]
- * interface.
- */
-/**
- * Mandatory empty constructor for the fragment manager to instantiate the
- * fragment (e.g. upon screen orientation changes).
+ * Un fragment qui représente une liste de Categorie.
+ * Doit implémenter l'inteface [OnListFragmentInteractionListener]
  */
 class CategorieListFragment : Fragment() {
-    // TODO: Customize parameters
     private var mColumnCount = 1
     private var mListener: OnListItemFragmentInteractionListener? = null
     private var categories = mutableListOf<Categorie>()
@@ -47,9 +39,10 @@ class CategorieListFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-        // Set the adapter
+        // Initialiser l'adapteur
         if (view is RecyclerView) {
             val context = view.getContext()
+            // Modifier l'affichage selon le nombre de colonnes initialisé à la création.
             if (mColumnCount <= 1) {
                 view.layoutManager = LinearLayoutManager(context)
             } else {
@@ -57,6 +50,7 @@ class CategorieListFragment : Fragment() {
             }
             view.adapter = RecyclerViewAdapter(categories, mListener)
 
+            // On fait appel à l'API pour aller chercher les catégories dans la base de données. On les ajoute à la liste et on averti l'Adapter que les donnés on changé.
             CATEGORIES_URL.httpGet().responseJson { request, response, result ->
                 createCategorieList(result.get())
                 view.adapter.notifyDataSetChanged()
@@ -66,6 +60,7 @@ class CategorieListFragment : Fragment() {
         return view
     }
 
+    // On ajoute les catégories dans la liste afin de pouvoir les afficher.
     fun createCategorieList(json: Json) {
 
         categories.clear()
@@ -74,7 +69,6 @@ class CategorieListFragment : Fragment() {
         for ( i in 0.. (tabJson.length() - 1)){
             categories.add(Categorie(Json(tabJson[i].toString())))
         }
-
     }
 
 
@@ -101,6 +95,7 @@ class CategorieListFragment : Fragment() {
     companion object {
         private val ARG_COLUMN_COUNT = "column-count"
 
+        // Ici, on indique le ce que l'on veut voir lorsque l'on crée un nouvel instance du fragment.
         fun newInstance(columnCount: Int): CategorieListFragment {
             val fragment = CategorieListFragment()
             val args = Bundle()

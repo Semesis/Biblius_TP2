@@ -1,7 +1,7 @@
 package ca.qc.android.cstj.biblius_tp2.helpers
 
 /**
- * Created by Administrateur on 2017-10-31.
+ * Appels de différents services nécessaires pour accéder à l'API
  */
 
 val CATEGORIES_URL = "https://tp1-web-services-semesis.c9users.io/categories"

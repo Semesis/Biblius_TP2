@@ -9,9 +9,6 @@ import ca.qc.android.cstj.biblius_tp2.models.Commentaire
 import kotlinx.android.synthetic.main.card_commentaire.view.*
 
 
-/**
- * Created by Administrateur on 2017-11-14.
- */
 class CommentaireRecyclerViewAdapter (private val mValues:List<Commentaire>):RecyclerView.Adapter<CommentaireRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
@@ -20,15 +17,14 @@ class CommentaireRecyclerViewAdapter (private val mValues:List<Commentaire>):Rec
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         holder.bind(mValues[position])
-
     }
 
     override fun getItemCount(): Int {
         return mValues.size
     }
 
+    // Ici, on veut créer des variables qui nous permettront de binder les informations dans la carte de commentaires.
     inner class ViewHolder( val mView: View):RecyclerView.ViewHolder(mView) {
         var lblAuteurCommentaire = mView.lblAuteurCommentaire
         var commentaire: Commentaire? = null
@@ -36,6 +32,7 @@ class CommentaireRecyclerViewAdapter (private val mValues:List<Commentaire>):Rec
         var lblDateCommentaire = mView.lblDateCommentaire
         var rtbEtoileCommentaire = mView.rtbEtoileCommentaire
 
+        // Prend un commentaire en paramètre et fait le binding
         fun bind(commentaire: Commentaire){
             this.commentaire = commentaire
             this.lblAuteurCommentaire.text = commentaire.auteurCommentaire

@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Biblius_TP2.iml" filepath="$PROJECT_DIR$/Biblius_TP2.iml" />
+      <module fileurl="file://C:\biblius\Biblius_TP2\Biblius_TP2.iml" filepath="C:\biblius\Biblius_TP2\Biblius_TP2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\biblius\Biblius_TP2\app\app.iml" filepath="C:\biblius\Biblius_TP2\app\app.iml" />
     </modules>
   </component>
 </project>

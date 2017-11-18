@@ -15,9 +15,7 @@ import com.github.kittinunf.fuel.httpGet
 import kotlinx.android.synthetic.main.fragment_succursale_details.*
 
 
-/**
- * A simple [Fragment] subclass.
- */
+
 class SuccursaleDetailsFragment : Fragment() {
 
     private lateinit var href : String
@@ -33,7 +31,7 @@ class SuccursaleDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         href.httpGet().responseJson { request, response, result ->
-            when (response.httpStatusCode) {
+            when (response.statusCode) {
                 200 -> {
                     val succursale = Succursale(result.get())
 
@@ -72,4 +70,4 @@ class SuccursaleDetailsFragment : Fragment() {
     }
 
 
-}// Required empty public constructor
+}// Besoin d'un constructeur publique vide

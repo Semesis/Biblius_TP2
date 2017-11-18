@@ -11,14 +11,7 @@ import ca.qc.android.cstj.biblius_tp2.R
 import kotlinx.android.synthetic.main.fragment_logo.view.*
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LogoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LogoFragment : Fragment() {
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +20,11 @@ class LogoFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+        // On veut crée une vue pour ce fragment
         var view = inflater.inflate(R.layout.fragment_logo, container, false)
+        // On ajoute un comportement pour le bouton des catégories
         view.btnCategories.setOnClickListener {
+            // Création d'une transaction qui sera une nouvelle instance du fragment de la liste des catégories et qui sera ajouté à la pile
             val transaction = fragmentManager.beginTransaction()
 
             transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
@@ -37,6 +32,7 @@ class LogoFragment : Fragment() {
             transaction.commit()
         }
         view.btnSuccursales.setOnClickListener {
+            // Création d'une transaction qui sera une nouvelle instance du fragment de la liste des succursales et qui sera ajouté à la pile
             val transaction = fragmentManager.beginTransaction()
 
             transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
@@ -47,21 +43,7 @@ class LogoFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
-
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LogoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        fun newInstance(): LogoFragment {
+                fun newInstance(): LogoFragment {
             val fragment = LogoFragment()
             val args = Bundle()
 
@@ -70,4 +52,4 @@ class LogoFragment : Fragment() {
         }
     }
 
-}// Required empty public constructor
+}// Il faut un constructeur vide qui soit publique.

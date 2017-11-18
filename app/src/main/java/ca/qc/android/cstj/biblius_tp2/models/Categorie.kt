@@ -3,7 +3,7 @@ package ca.qc.android.cstj.biblius_tp2.models
 import com.github.kittinunf.fuel.android.core.Json
 
 /**
- * Created by Administrateur on 2017-10-31.
+ * Classe contenant les informations pour les catégories
  */
 class Categorie(jsonObject: Json) : Item() {
 

@@ -24,21 +24,16 @@ import kotlinx.android.synthetic.main.fragment_livre_detail.view.*
 import java.util.*
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LivreDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+// Fragment qui permettra d'afficher les détails d'un livre
 class LivreDetailFragment : Fragment() {
 
+    // Cette variable n'est pas nécéssairement initialisé au début
     private lateinit var href: String
     private var commentaires = mutableListOf<Commentaire>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         href = arguments!!.getString(HREF)
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +43,7 @@ class LivreDetailFragment : Fragment() {
         hrefLivres.httpGet().responseJson{ request, response, result ->
             when (response.statusCode){
                 200 -> {
+                    // On veut ajouter les information à la vue du fragment.
                     val livre = Livre(result.get())
                     lblAuteurDetail.text = livre.auteur
                     lblPrixDetail.text = "${livre.prix.toString()} $"
@@ -57,32 +53,36 @@ class LivreDetailFragment : Fragment() {
                     Picasso.with(imgLivreDetail.context)
                             .load(urlLivre)
                             .resize(400,500)
-                           /* .centerCrop()
-                            .fit()*/
                             .into(imgLivreDetail)
 
                     createCommentaireList(result.get())
 
                     livre.commentaires = commentaires
 
+                    // Ici, on appelle l'adapteur de Commentaire afin de gérer la liste des commentaires d'un livre.
                     listCommentaire.layoutManager = LinearLayoutManager(context)
                     listCommentaire.adapter = CommentaireRecyclerViewAdapter(livre.commentaires)
                 }
             }
         }
 
+        // Fonction pour ajouter un commentaire
         view.btnAjouterCommentaire.setOnClickListener {
-
+            // On vérifie si tous les champs sont remplis
             if(txtNomPrenom.text.toString() != "" && txtCommentaire.text.toString() != "" && (rtbEtoile.rating > 0 && rtbEtoile.rating <=5)) {
+                // On crée un commentaire avec les informations saisies par l'utilisateur.
                 val commentaire = Commentaire("",
                         txtNomPrenom.text.toString(),
                         txtCommentaire.text.toString(),
                         rtbEtoile.rating.toInt())
                 Toast.makeText(context, "Commentaire ajouté!", Toast.LENGTH_LONG).show()
                 val hrefPost = href + "/commentaires"
+                // On envoit le commentaire créé en BD
                 hrefPost.httpPost()
                         .header("Content-Type" to "application/json")
+                        // Les "_" permetde remplacer les champs vides qui ne sont pas utilisés.
                         .body(commentaire.toJson()).responseJson { _, response, _ ->
+                    // Puis on gère le status qui est retourné, afin de faire la bonne action.
                     when(response.statusCode) {
                         201 -> {
                             updateCommentaires()
@@ -90,16 +90,16 @@ class LivreDetailFragment : Fragment() {
                     }
                 }
             }
+            // Si un des champs n'est pas rempli, on affiche un message à l'utilisateur lui indiquant qu'un des champs est vide.
             else {
                 Toast.makeText(context,"Vous devez remplir tous les champs", Toast.LENGTH_LONG).show()
             }
 
         }
-
-        // Inflate the layout for this fragment
         return view
     }
 
+    // Mise à jour de la liste des commentaires lors de l'ajout d'un nouveau commentaire
     fun updateCommentaires() {
         val hrefCommentaire = href + "?expand=commentaires"
         hrefCommentaire.httpGet().responseJson{ request, response, result ->
@@ -115,6 +115,7 @@ class LivreDetailFragment : Fragment() {
         }
     }
 
+    // On crée la liste des commentaires
     fun createCommentaireList(json: Json){
         commentaires.clear()
         val tabJson = json.obj().getJSONArray("commentaires")
@@ -126,6 +127,7 @@ class LivreDetailFragment : Fragment() {
     }
 
     companion object {
+        // Ceci est le href contenant le uuid du livre sélectionné
         private val HREF = "href"
 
 
@@ -138,4 +140,4 @@ class LivreDetailFragment : Fragment() {
         }
     }
 
-}// Required empty public constructor
+}// Nécessite un constructeur vide.

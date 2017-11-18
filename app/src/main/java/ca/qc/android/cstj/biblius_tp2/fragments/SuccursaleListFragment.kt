@@ -20,17 +20,9 @@ import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.fuel.httpGet
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SuccursaleListFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SuccursaleListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class SuccursaleListFragment : Fragment() {
 
-    // TODO: Rename and change types of parameters
     private var mColumnCount = 1
     private var mListener: OnListItemFragmentInteractionListener? = null
     private var succursales = mutableListOf<Succursale>()
@@ -47,7 +39,7 @@ class SuccursaleListFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
-        // Set adapter
+        // Set l'adapter
         if(view is RecyclerView) {
             val context = view.getContext()
             if(mColumnCount <= 1) {
@@ -56,7 +48,7 @@ class SuccursaleListFragment : Fragment() {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
             view.adapter = RecyclerViewAdapter(succursales, mListener)
-
+            // On fait appel à l'API pour aller chercher les succursales
             SUCCURSALES_URL.httpGet().responseJson { request, response, result ->
                 createSuccursaleList(result.get())
                 view.adapter.notifyDataSetChanged()
@@ -65,6 +57,7 @@ class SuccursaleListFragment : Fragment() {
         return view
     }
 
+    // Fonction qui crée une liste de succursales et qui les ajoute à la variable succursales. Ceci sera utilisé lors de la création de la vue
     fun createSuccursaleList(json: Json) {
 
         succursales.clear()
@@ -90,9 +83,7 @@ class SuccursaleListFragment : Fragment() {
     }
 
 
-
     companion object {
-
         private val ARG_COLUMN_COUNT = "column-count"
 
         fun newInstance(columnCount: Int) : SuccursaleListFragment {
@@ -104,4 +95,4 @@ class SuccursaleListFragment : Fragment() {
             return fragment
         }
     }
-}// Required empty public constructor
+}// Nécessite un constructeur public vide.

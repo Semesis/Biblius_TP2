@@ -10,7 +10,7 @@ import com.google.gson.annotations.Expose
 data class Commentaire(var dateCommentaire: String,  @Expose var auteurCommentaire: String, @Expose var message: String, @Expose var etoile: Int ) {
     constructor(json:Json) :this(json.obj().getString("dateCommentaire"), json.obj().getString("auteurCommentaire"), json.obj().getString("message"), json.obj().getInt("etoile"))
 
-
+    // On veut transformer les données du commentaires en Json afin de l'envoyer et de le stocker dans la base de données.
     fun toJson():String{
         return GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(this)
     }
