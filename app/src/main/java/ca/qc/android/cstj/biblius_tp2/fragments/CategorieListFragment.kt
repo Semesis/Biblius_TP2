@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import ca.qc.android.cstj.biblius_tp2.R
 import ca.qc.android.cstj.biblius_tp2.adapters.RecyclerViewAdapter
@@ -52,8 +53,19 @@ class CategorieListFragment : Fragment() {
 
             // On fait appel à l'API pour aller chercher les catégories dans la base de données. On les ajoute à la liste et on averti l'Adapter que les donnés on changé.
             CATEGORIES_URL.httpGet().responseJson { request, response, result ->
-                createCategorieList(result.get())
-                view.adapter.notifyDataSetChanged()
+                when(response.statusCode) {
+                    200 -> {
+                        createCategorieList(result.get())
+                        view.adapter.notifyDataSetChanged()
+                    }
+                    500 -> {
+                        Toast.makeText(context, "Erreur interne du serveur serveur!", Toast.LENGTH_LONG).show()
+                    }
+                    503 -> {
+                        Toast.makeText(context, "Service temporairement indisponible!", Toast.LENGTH_LONG).show()
+                    }
+                }
+
             }
 
         }
