@@ -48,7 +48,13 @@ class SuccursaleDetailsFragment : Fragment() {
                     lblInformationSuccursaleDetail.text = succursale.information
                 }
                 404 -> {
-                    //TODO: Erreur
+                    Toast.makeText(context, "Ressource non trouvée!", Toast.LENGTH_LONG).show()
+                }
+                500 -> {
+                    Toast.makeText(context, "Erreur interne du serveur serveur!", Toast.LENGTH_LONG).show()
+                }
+                503 -> {
+                    Toast.makeText(context, "Service temporairement indisponible!", Toast.LENGTH_LONG).show()
                 }
             }
         }

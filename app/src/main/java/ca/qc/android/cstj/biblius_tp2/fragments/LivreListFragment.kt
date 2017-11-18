@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import ca.qc.android.cstj.biblius_tp2.R
 import ca.qc.android.cstj.biblius_tp2.adapters.LivreCategorieRecyclerViewAdapter
 import ca.qc.android.cstj.biblius_tp2.models.Livre
@@ -52,7 +53,10 @@ class LivreListFragment : Fragment() {
                         view.adapter.notifyDataSetChanged()
                     }
                     500 -> {
-
+                        Toast.makeText(context, "Erreur interne du serveur serveur!", Toast.LENGTH_LONG).show()
+                    }
+                    503 -> {
+                        Toast.makeText(context, "Service temporairement indisponible!", Toast.LENGTH_LONG).show()
                     }
                 }
             }
