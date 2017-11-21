@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import ca.qc.android.cstj.biblius_tp2.MainActivity
 
 import ca.qc.android.cstj.biblius_tp2.R
 import ca.qc.android.cstj.biblius_tp2.adapters.ItemRecyclerViewAdapter
@@ -28,7 +29,6 @@ class SuccursaleListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (arguments != null) {
             mColumnCount = arguments.getInt(ARG_COLUMN_COUNT)
         }

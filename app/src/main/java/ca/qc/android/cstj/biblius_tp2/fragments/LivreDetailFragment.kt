@@ -99,6 +99,10 @@ class LivreDetailFragment : Fragment() {
                             when (response.statusCode) {
                                 201 -> {
                                     updateCommentaires()
+                                    // Vide les champs
+                                    txtNomPrenom.text.clear()
+                                    txtCommentaire.text.clear()
+                                    rtbEtoile.rating = 0.toFloat()
                                 }
                             }
                         }

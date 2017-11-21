@@ -74,7 +74,6 @@ class MainActivity : AppCompatActivity(),
         // Création de la transaction
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.contentFrame, LogoFragment.newInstance())
-
         // Le commit permet d'exécuter la modification, donc d'afficher la transaction
         transaction.commit()
     }
@@ -96,13 +95,13 @@ class MainActivity : AppCompatActivity(),
         when (item.itemId) {
             R.id.nav_categorie -> {
                 val transaction = fragmentManager.beginTransaction()
-
+                transaction.addToBackStack("Categories")
                 transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
                 transaction.commit()
             }
             R.id.nav_succursale -> {
                 val transaction = fragmentManager.beginTransaction()
-
+                transaction.addToBackStack("Succursales")
                 transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
                 transaction.commit()
             }

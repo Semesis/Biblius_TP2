@@ -6,6 +6,7 @@ import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ca.qc.android.cstj.biblius_tp2.MainActivity
 
 import ca.qc.android.cstj.biblius_tp2.R
 import kotlinx.android.synthetic.main.fragment_logo.view.*
@@ -26,7 +27,6 @@ class LogoFragment : Fragment() {
         view.btnCategories.setOnClickListener {
             // Création d'une transaction qui sera une nouvelle instance du fragment de la liste des catégories et qui sera ajouté à la pile
             val transaction = fragmentManager.beginTransaction()
-
             transaction.replace(R.id.contentFrame, CategorieListFragment.newInstance(1))
             transaction.addToBackStack("Logo")
             transaction.commit()
@@ -34,7 +34,6 @@ class LogoFragment : Fragment() {
         view.btnSuccursales.setOnClickListener {
             // Création d'une transaction qui sera une nouvelle instance du fragment de la liste des succursales et qui sera ajouté à la pile
             val transaction = fragmentManager.beginTransaction()
-
             transaction.replace(R.id.contentFrame, SuccursaleListFragment.newInstance(1))
             transaction.addToBackStack("Logo")
             transaction.commit()

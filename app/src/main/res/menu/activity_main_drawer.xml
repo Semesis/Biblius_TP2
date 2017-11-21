@@ -7,11 +7,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_categorie"
-            android:title="@string/categorie"
+            android:title="@string/categories"
             app:showAsAction="never"/>
         <item
             android:id="@+id/nav_succursale"
-            android:title="@string/succursale"
+            android:title="@string/succursales"
             app:showAsAction="never"/>
     </group>
 </menu>
