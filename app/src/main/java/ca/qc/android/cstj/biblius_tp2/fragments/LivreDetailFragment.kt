@@ -52,7 +52,7 @@ class LivreDetailFragment : Fragment() {
                     val urlLivre = "${TP1_WEB_SERVICES}${livre.image}"
                     Picasso.with(imgLivreDetail.context)
                             .load(urlLivre)
-                            .resize(400,500)
+                            .resize(300,400)
                             .into(imgLivreDetail)
 
                     createCommentaireList(result.get())
@@ -77,31 +77,42 @@ class LivreDetailFragment : Fragment() {
 
         // Fonction pour ajouter un commentaire
         view.btnAjouterCommentaire.setOnClickListener {
-            // On vérifie si tous les champs sont remplis
-            if(txtNomPrenom.text.toString() != "" && txtCommentaire.text.toString() != "" && (rtbEtoile.rating > 0 && rtbEtoile.rating <=5)) {
-                // On crée un commentaire avec les informations saisies par l'utilisateur.
-                val commentaire = Commentaire("",
-                        txtNomPrenom.text.toString(),
-                        txtCommentaire.text.toString(),
-                        rtbEtoile.rating.toInt())
-                Toast.makeText(context, "Commentaire ajouté!", Toast.LENGTH_LONG).show()
-                val hrefPost = href + "/commentaires"
-                // On envoit le commentaire créé en BD
-                hrefPost.httpPost()
-                        .header("Content-Type" to "application/json")
-                        // Les "_" permetde remplacer les champs vides qui ne sont pas utilisés.
-                        .body(commentaire.toJson()).responseJson { _, response, _ ->
-                    // Puis on gère le status qui est retourné, afin de faire la bonne action.
-                    when(response.statusCode) {
-                        201 -> {
-                            updateCommentaires()
+            // On vérifie si le commentaire est trop long.
+            if (txtCommentaire.text.toString().length <= 255) {
+                // On vérifie si le nom est trop long
+                if (txtNomPrenom.text.toString().length <= 30) {
+                    // On vérifie si tous les champs sont remplis
+                    if (txtNomPrenom.text.toString() != "" && txtCommentaire.text.toString() != "" && (rtbEtoile.rating > 0 && rtbEtoile.rating <= 5)) {
+                        // On crée un commentaire avec les informations saisies par l'utilisateur.
+                        val commentaire = Commentaire("",
+                                txtNomPrenom.text.toString(),
+                                txtCommentaire.text.toString(),
+                                rtbEtoile.rating.toInt())
+                        Toast.makeText(context, "Commentaire ajouté!", Toast.LENGTH_LONG).show()
+                        val hrefPost = href + "/commentaires"
+                        // On envoit le commentaire créé en BD
+                        hrefPost.httpPost()
+                                .header("Content-Type" to "application/json")
+                                // Les "_" permetde remplacer les champs vides qui ne sont pas utilisés.
+                                .body(commentaire.toJson()).responseJson { _, response, _ ->
+                            // Puis on gère le status qui est retourné, afin de faire la bonne action.
+                            when (response.statusCode) {
+                                201 -> {
+                                    updateCommentaires()
+                                }
+                            }
                         }
                     }
+                    // Si un des champs n'est pas rempli, on affiche un message à l'utilisateur lui indiquant qu'un des champs est vide.
+                    else {
+                        Toast.makeText(context, "Vous devez remplir tous les champs", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Toast.makeText(context, "Le nom est trop long!", Toast.LENGTH_LONG).show()
                 }
             }
-            // Si un des champs n'est pas rempli, on affiche un message à l'utilisateur lui indiquant qu'un des champs est vide.
-            else {
-                Toast.makeText(context,"Vous devez remplir tous les champs", Toast.LENGTH_LONG).show()
+            else{
+                Toast.makeText(context, "Le commentaire est trop long!", Toast.LENGTH_LONG).show()
             }
 
         }

@@ -1,7 +1,6 @@
 package ca.qc.android.cstj.biblius_tp2.fragments
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -13,9 +12,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import ca.qc.android.cstj.biblius_tp2.R
-import ca.qc.android.cstj.biblius_tp2.adapters.RecyclerViewAdapter
+import ca.qc.android.cstj.biblius_tp2.adapters.ItemRecyclerViewAdapter
 import ca.qc.android.cstj.biblius_tp2.helpers.SUCCURSALES_URL
-import ca.qc.android.cstj.biblius_tp2.helpers.TP1_WEB_SERVICES
 import ca.qc.android.cstj.biblius_tp2.models.Succursale
 import com.github.kittinunf.fuel.android.core.Json
 import com.github.kittinunf.fuel.android.extension.responseJson
@@ -48,7 +46,7 @@ class SuccursaleListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = RecyclerViewAdapter(succursales, mListener)
+            view.adapter = ItemRecyclerViewAdapter(succursales, mListener)
             // On fait appel à l'API pour aller chercher les succursales
             SUCCURSALES_URL.httpGet().responseJson { request, response, result ->
                 when(response.statusCode) {

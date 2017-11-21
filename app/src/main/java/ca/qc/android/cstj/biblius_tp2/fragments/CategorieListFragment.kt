@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import ca.qc.android.cstj.biblius_tp2.R
-import ca.qc.android.cstj.biblius_tp2.adapters.RecyclerViewAdapter
+import ca.qc.android.cstj.biblius_tp2.adapters.ItemRecyclerViewAdapter
 import ca.qc.android.cstj.biblius_tp2.helpers.CATEGORIES_URL
 import ca.qc.android.cstj.biblius_tp2.models.Categorie
 import com.github.kittinunf.fuel.android.core.Json
@@ -49,7 +49,7 @@ class CategorieListFragment : Fragment() {
             } else {
                 view.layoutManager = GridLayoutManager(context, mColumnCount)
             }
-            view.adapter = RecyclerViewAdapter(categories, mListener)
+            view.adapter = ItemRecyclerViewAdapter(categories, mListener)
 
             // On fait appel à l'API pour aller chercher les catégories dans la base de données. On les ajoute à la liste et on averti l'Adapter que les donnés on changé.
             CATEGORIES_URL.httpGet().responseJson { request, response, result ->

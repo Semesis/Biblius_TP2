@@ -87,7 +87,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listCommentaire"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="146dp"
+            android:scrollbars="vertical"
             android:name="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment"
             app:layoutManager="LinearLayoutManager"
             tools:context="ca.qc.android.cstj.biblius_tp2.fragments.LivreDetailFragment"
@@ -110,17 +111,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Votre nom et prénom"
+                android:textSize="16dp"
                 android:textColor="#510025"/>
             <EditText
                 android:id="@+id/txtCommentaire"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="16dp"
                 android:hint="Votre commentaire"
                 android:textColor="#510025"/>
             <RatingBar
                 android:id="@+id/rtbEtoile"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="45dp"
                 android:numStars="5"
                 android:stepSize="1"
                 android:progressTint="#510025"/>

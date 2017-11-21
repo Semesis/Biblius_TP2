@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.card_item.view.*
  * [RecyclerView.Adapter] permet d'afficher un [Item] et faire un appel
  * à [OnListItemFragmentInteractionListener].
  */
- class RecyclerViewAdapter(private val mValues:List<Item>, private val mListener: OnListItemFragmentInteractionListener?):RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+ class ItemRecyclerViewAdapter(private val mValues:List<Item>, private val mListener: OnListItemFragmentInteractionListener?):RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder>() {
 
      override fun onCreateViewHolder(parent:ViewGroup, viewType:Int): ViewHolder {
         // On affiche la carte d'item, qui prendra soit une liste de catégories ou une liste de succursales. Ceci affiche seulement les noms.
